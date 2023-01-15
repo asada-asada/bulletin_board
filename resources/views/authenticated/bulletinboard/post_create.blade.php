@@ -6,11 +6,11 @@
     <div class="">
       <p class="mb-0">カテゴリー</p>
       <select class="w-100" form="postCreate" name="post_category_id">
-        @foreach($main_categories as $main_category)
-        <optgroup label="{{ $main_category->main_category }}"></optgroup>
-        <!-- サブカテゴリー表示 -->
+        <optgroup label="教科">
+          <option>英語</option>
+          <option>国語</option>
+          <option>数学</option>
         </optgroup>
-        @endforeach
       </select>
     </div>
     <div class="mt-3">
@@ -25,6 +25,7 @@
       <span class="error_message">{{ $errors->first('post_body') }}</span>
       @endif
       <p class="mb-0">投稿内容</p>
+
       <textarea class="w-100" form="postCreate" name="post_body">{{ old('post_body') }}</textarea>
     </div>
     <div class="mt-3 text-right">

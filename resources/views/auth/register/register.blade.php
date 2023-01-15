@@ -13,8 +13,23 @@
   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 </head>
 <body>
+
+
+
+@if ($errors->any())
+	    <div class="alert alert-danger">
+	        <ul>
+	            @foreach ($errors->all() as $error)
+	                <li>{{ $error }}</li>
+	            @endforeach
+	        </ul>
+	    </div>
+@endif
+
   <form action="{{ route('registerPost') }}" method="POST">
-    <div class="w-100 vh-100 d-flex" style="align-items:center; justify-content:center;">
+  @csrf
+
+  <div class="w-100 vh-100 d-flex" style="align-items:center; justify-content:center;">
       <div class="w-25 vh-75 border p-3">
         <div class="register_form">
           <div class="d-flex mt-3" style="justify-content:space-between">
@@ -22,6 +37,10 @@
               <label class="d-block m-0" style="font-size:13px">姓</label>
               <div class="border-bottom border-primary" style="width:140px;">
                 <input type="text" style="width:140px;" class="border-0 over_name" name="over_name">
+                @if ($errors->has('over_name'))
+                  <li>{{$errors->first('over_name') }}</li>
+                @endif
+
               </div>
             </div>
             <div class="" style="width:140px">
@@ -90,6 +109,8 @@
             <option value="2008">2008</option>
             <option value="2009">2009</option>
             <option value="2010">2010</option>
+            <option value="2023">2023</option>
+
           </select>
           <label style="font-size:13px">年</label>
           <select class="old_month" name="old_month">
