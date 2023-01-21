@@ -70,32 +70,32 @@ class RegisterController extends Controller
 
     public function registerPost(Request $request)
     {
-        DB::beginTransaction();
+        // DB::beginTransaction();
         try{
             $old_year = $request->old_year;
             $old_month = $request->old_month;
             $old_day = $request->old_day;
             $data = $old_year . '-' . $old_month . '-' . $old_day;
             $birth_day = date('Y-m-d', strtotime($data));
-            $subjects = $request->role;
+            $subjects = $request->subject;
 
-            // $request->birth_day = $birth_day;
-            $request->replace($date);
+            // // $request->birth_day = $birth_day;
+            // $request->replace($date);
 
-            $validator = Validator::make($request->all(), [
-                'over_name' => 'required|string|max:10',
-                'under_name' => 'required|string|max:10',
-                'over_name_kana' => 'required|string|max:30|regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u',
-                'under_name_kana' => 'required|string|max:30|regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u',
-                'mail_address' => 'required|email|max:100|unique:users',
-                'sex' => 'required',
-                'old_year' => 'required|after:2000',
-                'old_month' => 'required',
-                'old_day' => 'required',
-                'birth_day' =>'before:today',
-                'role' => 'required',
-                'password' => 'required|string|min:8|max:30|confirmed',
-            ]);
+            // // $validator = Validator::make($request->all(), [
+            // //     'over_name' => 'required|string|max:10',
+            // //     'under_name' => 'required|string|max:10',
+            // //     'over_name_kana' => 'required|string|max:30|regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u',
+            // //     'under_name_kana' => 'required|string|max:30|regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u',
+            // //     'mail_address' => 'required|email|max:100|unique:users',
+            // //     'sex' => 'required',
+            // //     'old_year' => 'required|after:2000',
+            // //     'old_month' => 'required',
+            // //     'old_day' => 'required',
+            // //     'birth_day' =>'before:today',
+            // //     'role' => 'required',
+            // //     'password' => 'required|string|min:8|max:30|confirmed',
+            // // ]);
 
 
 
@@ -106,11 +106,11 @@ class RegisterController extends Controller
             // ]
             // ]);
 
-            if ($validator->fails() || $validator_birth_day->fails()) {
-                return redirect('register')
-                ->withErrors($validator)
-                ->withInput();
-            }
+            // if ($validator->fails() || $validator_birth_day->fails()) {
+            //     return redirect('register')
+            //     ->withErrors($validator)
+            //     ->withInput();
+            // }
 
 
             $user_get = User::create([
@@ -129,12 +129,14 @@ class RegisterController extends Controller
             if(!empty($subjects)){
                 $user->subjects()->attach($subjects);
             }
-            DB::commit();
+            //中間テーブルにデータ挿入
+
+            // DB::commit();
             return view('auth.login.login');
 
         }catch(\Exception $e){
 
-            DB::rollback();
+            // DB::rollback();
             return redirect()->route('loginView');
 
         }
