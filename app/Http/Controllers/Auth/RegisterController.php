@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use App\Http\Requests\RegisterFormRequest;
+use App\Http\Requests\UserRequest;
 
 use DB;
 
@@ -68,7 +68,7 @@ class RegisterController extends Controller
     }
 
 
-    public function registerPost(Request $request)
+    public function registerPost(UserRequest $request)
     {
         // DB::beginTransaction();
         try{

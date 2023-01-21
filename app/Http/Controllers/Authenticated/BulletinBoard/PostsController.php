@@ -11,6 +11,7 @@ use App\Models\Posts\PostComment;
 use App\Models\Posts\Like;
 use App\Models\Users\User;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
+use App\Http\Requests\CommentRequest;
 use Auth;
 
 class PostsController extends Controller
@@ -18,7 +19,10 @@ class PostsController extends Controller
     public function show(Request $request){
         $posts = Post::with('user', 'postComments')->get();
         $categories = MainCategory::get();
+
+        //Like.phpのインスタンス化
         $like = new Like;
+
         $post_comment = new Post;
         if(!empty($request->keyword)){
             $posts = Post::with('user', 'postComments')
@@ -74,7 +78,8 @@ class PostsController extends Controller
         return redirect()->route('post.input');
     }
 
-    public function commentCreate(Request $request){
+    //CommentRequest=CommentRequest.php -> バリデーション効くようになる
+    public function commentCreate(CommentRequest $request){
         PostComment::create([
             'post_id' => $request->post_id,
             'user_id' => Auth::id(),
@@ -93,7 +98,7 @@ class PostsController extends Controller
         $like_post_id = Like::with('users')->where('like_user_id', Auth::id())->get('like_post_id')->toArray();
         $posts = Post::with('user')->whereIn('id', $like_post_id)->get();
         $like = new Like;
-        return view('authenticated.bulletinboard.post_like', compact('posts', 'like'));
+        return view('authenticated.bulletinboard.post_like', compact('posts', 'like','like_post_id' ,'like_user_id'));
     }
 
     public function postLike(Request $request){

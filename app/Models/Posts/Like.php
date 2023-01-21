@@ -17,7 +17,9 @@ class Like extends Model
         return $this->belongsToMany('App\Models\Users\User', 'likes', 'like_post_id', 'like_user_id');
     }
 
+    //いいねのカウント
     public function likeCounts($post_id){
         return $this->where('like_post_id', $post_id)->get()->count();
+        //posts.blade.phpの{{ $like->likeCounts($post->id) }}を受け取る→$post_idにぶち込む→like_post_idの数をカウントする
     }
 }
