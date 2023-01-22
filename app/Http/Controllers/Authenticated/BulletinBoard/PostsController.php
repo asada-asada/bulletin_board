@@ -78,7 +78,8 @@ class PostsController extends Controller
         return redirect()->route('post.input');
     }
 
-    //CommentRequest=CommentRequest.php -> バリデーション効くようになる
+    //CommentRequest=CommentRequest.php
+    //-> バリデーション効くようになる
     public function commentCreate(CommentRequest $request){
         PostComment::create([
             'post_id' => $request->post_id,
