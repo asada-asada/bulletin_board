@@ -23,7 +23,7 @@ class UsersTableSeeder extends Seeder
                 'sex'=>'1',
                 'birth_day'=>'2000-01-01',
                 'role'=>'1',
-                'password'=>'password',
+                'password'=>Hash::make('password'),
                 'created_at'=>now(),
             ],
             [
@@ -35,7 +35,7 @@ class UsersTableSeeder extends Seeder
                 'sex'=>'2',
                 'birth_day'=>'2002-02-02',
                 'role'=>'2',
-                'password'=>'password',
+                'password'=>Hash::make('password'),
                 'created_at'=>now(),
             ],
             [
@@ -47,7 +47,7 @@ class UsersTableSeeder extends Seeder
                 'sex'=>'3',
                 'birth_day'=>'2003-03-03',
                 'role'=>'3',
-                'password'=>'password',
+                'password'=>Hash::make('password'),
                 'created_at'=>now(),
             ],
             [
@@ -59,7 +59,7 @@ class UsersTableSeeder extends Seeder
                 'sex'=>'1',
                 'birth_day'=>'2004-04-04',
                 'role'=>'4',
-                'password'=>'password',
+                'password'=>Hash::make('password'),
                 'created_at'=>now(),
             ],
 
